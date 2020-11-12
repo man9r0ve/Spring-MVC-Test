@@ -22,5 +22,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: jenkins webhook
-      - run: CRUMB=$(curl -u "${{secrets.JENKINS_USERNAME}}:${{secrets.JENKINS_API_TOKEN}}" -s 'http://15.165.180.120/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)')
-      - run: curl -s -X POST -u "${{secrets.JENKINS_USERNAME}}:${{secrets.JENKINS_API_TOKEN}}" -H "${CRUMB}" "http://15.165.180.120/job/findhouse.www/build"
+        run: |
+          CRUMB=$(curl -u "${{secrets.JENKINS_USERNAME}}:${{secrets.JENKINS_API_TOKEN}}" -s 'http://15.165.180.120/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)')
+          curl -s -X POST -u "${{secrets.JENKINS_USERNAME}}:${{secrets.JENKINS_API_TOKEN}}" -H "${CRUMB}" "http://15.165.180.120/job/findhouse.www/build"
